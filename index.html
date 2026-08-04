@@ -67,11 +67,13 @@
   a{color:inherit; text-decoration:none;}
   ul{list-style:none;}
 
+  /* ---------- signature background: the dopamine curve thread ---------- */
   .curve-thread{
     position:absolute; left:0; top:0; width:100%; height:100%;
     pointer-events:none; z-index:0; opacity:0.55;
   }
 
+  /* ---------- nav ---------- */
   header.nav{
     position:fixed; top:0; left:0; width:100%; z-index:100;
     background:rgba(10,11,13,0); backdrop-filter:blur(0px);
@@ -96,6 +98,7 @@
   }
   .nav-cta:hover{border-color:var(--ember); background:rgba(255,122,61,0.08);}
 
+  /* ---------- hero ---------- */
   .hero{
     min-height:100svh;
     display:flex; flex-direction:column; justify-content:center;
@@ -159,10 +162,12 @@
   }
   .hero-stat span{font-size:0.85rem; color:var(--ink-faint);}
 
+  /* ---------- section headers ---------- */
   .section-head{max-width:640px; margin-bottom:56px;}
   .section-head h2{font-size:clamp(1.9rem, 3.4vw, 2.7rem);}
   .section-head p{color:var(--ink-dim); margin-top:16px; font-size:1.05rem;}
 
+  /* ---------- problem cards ---------- */
   .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
   @media (max-width:860px){.grid-3{grid-template-columns:1fr;}}
   .card{
@@ -182,6 +187,7 @@
     text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px; display:block;
   }
 
+  /* ---------- dopamine explainer ---------- */
   .explain{display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center;}
   @media (max-width:860px){.explain{grid-template-columns:1fr;}}
   .explain p{color:var(--ink-dim); margin-bottom:18px; font-size:1.02rem;}
@@ -204,6 +210,7 @@
     position:relative; overflow:hidden;
   }
 
+  /* ---------- quiz / 5 sinais ---------- */
   .quiz-shell{
     background:var(--graphite);
     border:1px solid var(--line);
@@ -245,6 +252,7 @@
   .gauge-label{font-size:0.78rem; color:var(--ink-faint); margin-top:16px; max-width:200px;}
   #gaugeMsg{font-size:0.88rem; color:var(--ink-dim); margin-top:10px; min-height:40px;}
 
+  /* ---------- protocol timeline (signature curve) ---------- */
   .protocol{position:relative;}
   .curve-svg-wrap{width:100%; margin:64px 0 20px;}
   .phase-labels{display:flex; justify-content:space-between; margin-top:10px;}
@@ -268,6 +276,7 @@
   }
   .day-card ul li::before{content:"—"; position:absolute; left:0; color:var(--ink-faint);}
 
+  /* ---------- offer ---------- */
   .offer-section{
     background:linear-gradient(180deg, var(--void), #0d0f13 40%, var(--void));
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
@@ -298,6 +307,7 @@
     display:flex; align-items:center; justify-content:center; gap:8px;
   }
 
+  /* ---------- testimonials ---------- */
   .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
   @media (max-width:860px){.testi-grid{grid-template-columns:1fr;}}
   .testi{
@@ -315,6 +325,7 @@
   .testi-who b{display:block; font-size:0.9rem;}
   .testi-who span{font-size:0.78rem; color:var(--ink-faint);}
 
+  /* ---------- faq ---------- */
   .faq-item{border-bottom:1px solid var(--line);}
   .faq-q{
     padding:24px 0; display:flex; justify-content:space-between; align-items:center;
@@ -331,6 +342,7 @@
   }
   .faq-a-inner{padding-bottom:24px;}
 
+  /* ---------- final cta ---------- */
   .final-cta{text-align:center;}
   .final-cta h2{font-size:clamp(1.9rem,4vw,2.6rem); max-width:600px; margin:0 auto 20px;}
   .final-cta p{color:var(--ink-dim); max-width:480px; margin:0 auto 36px;}
@@ -346,6 +358,69 @@
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
   }
+
+  /* ---------- modal de compra ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; z-index:200;
+    background:rgba(6,7,9,0.72);
+    backdrop-filter:blur(4px);
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+    opacity:0; pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  .modal-overlay.open{opacity:1; pointer-events:auto;}
+  .modal-box{
+    background:var(--graphite);
+    border:1px solid var(--line-strong);
+    border-radius:20px;
+    max-width:420px; width:100%;
+    padding:36px 32px 32px;
+    position:relative;
+    transform:translateY(16px) scale(0.97);
+    transition:transform .3s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 40px 100px -20px rgba(0,0,0,0.6);
+  }
+  .modal-overlay.open .modal-box{transform:translateY(0) scale(1);}
+  .modal-close{
+    position:absolute; top:16px; right:16px;
+    width:32px; height:32px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-faint); font-size:1.1rem;
+    background:transparent; border:none; cursor:pointer;
+    transition:background .2s, color .2s;
+  }
+  .modal-close:hover{background:var(--graphite-2); color:var(--ink);}
+  .modal-box .eyebrow{justify-content:flex-start;}
+  .modal-box h3{font-size:1.4rem; margin-bottom:14px; line-height:1.2;}
+  .modal-box p{color:var(--ink-dim); font-size:0.95rem; margin-bottom:10px;}
+  .modal-reasons{margin:20px 0; display:grid; gap:10px;}
+  .modal-reasons li{
+    display:flex; gap:10px; font-size:0.9rem; color:var(--ink-dim); align-items:flex-start;
+  }
+  .modal-reasons li b{color:var(--ember); flex-shrink:0;}
+  .modal-price{
+    display:flex; align-items:baseline; gap:10px; margin:18px 0 6px;
+  }
+  .modal-price .old{font-family:'IBM Plex Mono',monospace; color:var(--ink-faint); text-decoration:line-through; font-size:0.95rem;}
+  .modal-price .new{font-family:'Fraunces',serif; font-size:1.9rem; font-weight:600;}
+  .modal-buy-btn{
+    width:100%; justify-content:center; margin-top:14px;
+    animation:btn-pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes btn-pulse{
+    0%,100%{box-shadow:0 8px 30px -8px rgba(255,122,61,0.55);}
+    50%{box-shadow:0 8px 40px -6px rgba(255,122,61,0.85);}
+  }
+  .modal-secondary{
+    display:block; text-align:center; margin-top:16px;
+    font-size:0.85rem; color:var(--ink-faint);
+    text-decoration:underline; cursor:pointer; background:none; border:none; width:100%;
+  }
+  .modal-secondary:hover{color:var(--ink-dim);}
+  @media (prefers-reduced-motion: reduce){
+    .modal-buy-btn{animation:none;}
+  }
 </style>
 </head>
 <body>
@@ -357,6 +432,7 @@
   </div>
 </header>
 
+<!-- ================= HERO ================= -->
 <section class="hero">
   <div class="hero-glow"></div>
   <div class="wrap hero-content">
@@ -379,6 +455,7 @@
   </div>
 </section>
 
+<!-- ================= PROBLEMA ================= -->
 <section id="problema">
   <div class="wrap">
     <div class="section-head reveal">
@@ -406,6 +483,7 @@
   </div>
 </section>
 
+<!-- ================= O QUE É DOPAMINA ================= -->
 <section id="dopamina">
   <div class="wrap">
     <div class="explain">
@@ -423,6 +501,7 @@
   </div>
 </section>
 
+<!-- ================= QUIZ 5 SINAIS ================= -->
 <section id="sinais">
   <div class="wrap">
     <div class="section-head reveal">
@@ -462,6 +541,7 @@
   </div>
 </section>
 
+<!-- ================= PROTOCOLO / CURVA ================= -->
 <section id="protocolo" class="protocol">
   <div class="wrap">
     <div class="section-head reveal">
@@ -526,6 +606,7 @@
   </div>
 </section>
 
+<!-- ================= OFERTA ================= -->
 <section id="oferta" class="offer-section">
   <div class="wrap">
     <div class="offer-box reveal">
@@ -547,14 +628,15 @@
         <li><b>✓</b> Plano de manutenção pós-7-dias (regra do 1%)</li>
       </ul>
 
-      <a href="#" class="btn-primary full" id="checkoutBtn">
+      <button class="btn-primary full" id="checkoutBtn" onclick="openBuyModal()">
         Quero meu Reset da Dopamina agora
-      </a>
+      </button>
       <p class="guarantee">🔒 Compra segura · acesso enviado por e-mail em minutos</p>
     </div>
   </div>
 </section>
 
+<!-- ================= PROVA SOCIAL ================= -->
 <section id="depoimentos">
   <div class="wrap">
     <div class="section-head reveal">
@@ -578,6 +660,7 @@
   </div>
 </section>
 
+<!-- ================= FAQ ================= -->
 <section id="faq">
   <div class="wrap" style="max-width:760px;">
     <div class="section-head reveal">
@@ -605,13 +688,14 @@
   </div>
 </section>
 
+<!-- ================= CTA FINAL ================= -->
 <section class="final-cta">
   <div class="wrap">
     <div class="reveal">
       <div class="eyebrow" style="justify-content:center;">Última chamada</div>
       <h2>Seu cérebro já sabe reagir a estímulo.<br>Falta ensinar ele a reagir a esforço de novo.</h2>
       <p>Você não precisa ser perfeito. Precisa ser consistente — e isso começa com uma decisão pequena, hoje.</p>
-      <a href="#oferta" class="btn-primary">Começar meu reset de 7 dias</a>
+      <button class="btn-primary" onclick="openBuyModal()">Começar meu reset de 7 dias</button>
     </div>
   </div>
 </section>
@@ -622,18 +706,64 @@
   </div>
 </footer>
 
+<div class="modal-overlay" id="buyModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeBuyModal()" aria-label="Fechar">✕</button>
+    <div class="eyebrow">Antes de fechar</div>
+    <h3>Seu cérebro vai te convencer a adiar isso. Não deixa.</h3>
+    <p>É exatamente esse impulso — "depois eu faço" — que o protocolo existe pra quebrar. Cada dia adiado é mais um dia de tela no piloto automático.</p>
+    <ul class="modal-reasons">
+      <li><b>✓</b> Leitura de ~40 min, começa hoje à noite</li>
+      <li><b>✓</b> Protocolo dia a dia, sem depender de força de vontade</li>
+      <li><b>✓</b> Acesso imediato por e-mail após a compra</li>
+    </ul>
+    <div class="modal-price">
+      <span class="old">R$ 97</span>
+      <span class="new">R$ 27</span>
+    </div>
+    <a href="#" class="btn-primary modal-buy-btn" id="modalBuyBtn" target="_blank" rel="noopener">
+      Comprar agora e começar hoje
+    </a>
+    <button class="modal-secondary" onclick="closeBuyModal()">Ainda não, quero continuar lendo</button>
+  </div>
+</div>
+
 <script>
+// ---------- link de checkout (Kiwify) ----------
+// SUBSTITUA a linha abaixo pelo link real do seu produto no Kiwify assim que tiver:
+const KIWIFY_LINK = "COLOQUE_AQUI_O_LINK_DO_KIWIFY";
+document.getElementById('modalBuyBtn').href = KIWIFY_LINK;
+
+// ---------- modal de compra ----------
+function openBuyModal(){
+  document.getElementById('buyModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeBuyModal(){
+  document.getElementById('buyModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('buyModal').addEventListener('click', (e) => {
+  if(e.target.id === 'buyModal'){ closeBuyModal(); }
+});
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape'){ closeBuyModal(); }
+});
+
+// ---------- nav scroll state ----------
 const nav = document.getElementById('siteNav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 40);
 });
 
+// ---------- reveal on scroll ----------
 const revealEls = document.querySelectorAll('.reveal, .card');
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); } });
 }, {threshold:0.15});
 revealEls.forEach(el => io.observe(el));
 
+// ---------- 5 sinais quiz ----------
 const signItems = document.querySelectorAll('.sign-item');
 const gauge = document.getElementById('gauge');
 const gaugeNum = document.getElementById('gaugeNum');
@@ -660,6 +790,7 @@ signItems.forEach(item => {
   });
 });
 
+// ---------- faq accordion ----------
 document.querySelectorAll('.faq-item').forEach(item => {
   const q = item.querySelector('.faq-q');
   const a = item.querySelector('.faq-a');
@@ -673,6 +804,7 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
+// ---------- synapse mini-animation ----------
 (function(){
   const svg = document.getElementById('synapseSvg');
   const NS = "http://www.w3.org/2000/svg";
